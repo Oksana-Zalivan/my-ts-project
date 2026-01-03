@@ -6,13 +6,13 @@
 // 1) Зроби функцію узагальненою <T>
 // 2) Повернення має бути T
 // 3) Додай явні дженерики у прикладах
-// function getLastElement(array) {
-//   return array[array.length - 1];
-// }
+function getLastElement(array) {
+    return array[array.length - 1];
+}
 
-// console.log(getLastElement<number>([1, 2, 3])); // 3
-// console.log(getLastElement<string>(["a", "b", "c"])); // "c"
-// console.log(getLastElement<boolean>([true, false])); // false
+console.log(getLastElement<number>([1, 2, 3])); // 3
+console.log(getLastElement<string>(["a", "b", "c"])); // "c"
+console.log(getLastElement<boolean>([true, false])); // false
 
 // 1.2 getMiddleElement
 // task-1-2.ts
