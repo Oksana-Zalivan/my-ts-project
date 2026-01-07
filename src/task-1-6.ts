@@ -89,13 +89,12 @@
 // Зроби updates таким, щоб дозволялося оновлювати частину полів: Partial<T>.
 // Тип повернення має бути T.
 // Перевір, що не можна оновити неіснуюче поле.
-function updateObj(obj, updates) {
-    return { ...obj, ...updates };
-}
+// function updateObj<T> (obj: T, updates: Partial<T>): T {
+//     return { ...obj, ...updates };
+// }
 
-updateObj({ name: "Oksana", age: 38 }, { age: 39 });
-updateObj({ done: false }, { done: true });
-
+// updateObj<{name: string, age: number}>({ name: "Oksana", age: 38 }, { age: 39 });
+// updateObj<{done: boolean}>({ done: false }, { done: true });
 
 
 
@@ -106,14 +105,13 @@ updateObj({ done: false }, { done: true });
 // Тип повернення має бути T[].
 // Додай явні типи дженерика у виклики.
 // Перевір, що toArray<number>("5") не компілюється.
-// function toArray(value) {
-//   return [value];
+// function toArray<T>(value: T): T[] {
+//     return [value];
 // }
 
-// toArray(5);        // [5]
-// toArray("hi");     // ["hi"]
-// toArray(true);     // [true]
-
+// toArray<number>(5);        // [5]
+// toArray<string>("hi");     // ["hi"]
+// toArray<boolean>(true);     // [true]
 
 
 
@@ -124,13 +122,12 @@ updateObj({ done: false }, { done: true });
 // Обидва параметри мають бути T[], і результат теж T[].
 // Додай явні дженерики у виклики.
 // Перевір, що concatArrays([1,2], ["3"]) не проходить.
-// function concatArrays(a, b) {
-//   return a.concat(b);
+// function concatArrays<T>(a:T[], b:T[]): T[] {
+//     return a.concat(b);
 // }
 
-// concatArrays([1, 2], [3, 4]);           // [1,2,3,4]
-// concatArrays(["a"], ["b", "c"]);        // ["a","b","c"]
-
+// concatArrays<number>([1, 2], [3, 4]);           // [1,2,3,4]
+// concatArrays<string>(["a"], ["b", "c"]);        // ["a","b","c"]
 
 
 
@@ -141,16 +138,15 @@ updateObj({ done: false }, { done: true });
 // id має бути рядком (або зроби варіант з string | number, якщо хочеш складніше).
 // Тип результату має відображати, що значення — це T.
 // Перевір, що масив без id не компілюється.
-// function indexById(items) {
-//   const result = {};
-//   for (const item of items) {
-//     result[item.id] = item;
-//   }
-//   return result;
+// function indexById<T extends { id: string | number }>(items: T[]): Record<string | number, T> {
+//     const result: Record<string | number, T> = {};
+//     for (const item of items) {
+//         result[item.id] = item;
+//     }
+//     return result;
 // }
 
-// indexById([{ id: "a", value: 1 }, { id: "b", value: 2 }]);
-
+// indexById<{id: string | number, value?: number}>([{ id: "a", value: 1 }, { id: "b", value: 2 }]);
 
 
 
@@ -161,12 +157,12 @@ updateObj({ done: false }, { done: true });
 // Тип повернення має бути T | null.
 // Додай явні дженерики у виклики.
 // Перевір, що TypeScript правильно розуміє: якщо повернулося не null, то це T.
-// function firstOrNull(arr) {
-//   return arr.length ? arr[0] : null;
+// function firstOrNull<T>(arr: T[]): T | null {
+//     return arr.length ? arr[0] : null;
 // }
 
-// firstOrNull([1, 2, 3]);       // 1
-// firstOrNull([]);              // null
-// firstOrNull(["a", "b"]);      // "a"
+// firstOrNull<number>([1, 2, 3]);       // 1
+// firstOrNull<null>([]);              // null
+// firstOrNull<string>(["a", "b"]);      // "a"
 
 
